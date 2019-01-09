@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import enzyme from 'enzyme';
 import App from '../App';
+import CommentBox from '../CommentBox';
+import CommentList from '../CommentList';
 
 it('shows a comment box', () => {
-  // create fake div
-  const div = document.createElement('div');
-  ReactDOM.render(<App />,div);
+  const wrapped = enzyme.shallow(<App/>);
+  expect(wrapped.find(CommentBox).length).toEqual(1);
+});
 
-  // logic
-  expect(div.innerHTML).toContain('CommentBox');
-  console.log(div.innerHTML);
-
-  // clear JSDOM
-  ReactDOM.unmountComponentAtNode(div);
+it('shows a comment list',() => {
+  const wrapped = enzyme.shallow(<App/>);
+  expect(wrapped.find(CommentList).length).toEqual(1);
 });
