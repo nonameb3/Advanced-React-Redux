@@ -1,15 +1,20 @@
 import React from 'react';
-import enzyme from 'enzyme';
-import App from '../App';
-import CommentBox from '../CommentBox';
-import CommentList from '../CommentList';
+import { shallow } from 'enzyme';
+import App from 'components/App';
+import CommentBox from 'components/CommentBox';
+import CommentList from 'components/CommentList';
 
+let wrapped;
+// run frist
+beforeEach(()=>{
+  wrapped = shallow(<App/>);
+});
+
+// run test
 it('shows a comment box', () => {
-  const wrapped = enzyme.shallow(<App/>);
   expect(wrapped.find(CommentBox).length).toEqual(1);
 });
 
 it('shows a comment list',() => {
-  const wrapped = enzyme.shallow(<App/>);
   expect(wrapped.find(CommentList).length).toEqual(1);
 });
