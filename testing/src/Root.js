@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Reducers from 'reducers';
 
-function Root(props){
+function Root({children, initalState={}}){
   return (
-    <Provider store={createStore(Reducers)}>
-      {props.children}
+    <Provider store={createStore(Reducers, initalState)}>
+      {children}
     </Provider>
   );
 }
