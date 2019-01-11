@@ -1,6 +1,6 @@
 import { SAVE_COMMENT } from 'actions/types';
 
-export const CommentReducer = (state=[], {type, payload}) => {
+export default (state=[], {type, payload}) => {
   switch(type){
     case SAVE_COMMENT:
       return [...state, payload];
