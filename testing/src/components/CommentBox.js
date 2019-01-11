@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
+import { SaveComment } from 'actions';
 
-function CommentBox() {
+function CommentBox(props) {
   const [comment, setComment] = useState('');
 
   function handleChange(event) {
@@ -9,7 +11,7 @@ function CommentBox() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
+    props.SaveComment(comment);
     setComment('');
   };
 
@@ -24,4 +26,4 @@ function CommentBox() {
   );
 };
 
-export default CommentBox;
+export default connect(null, {SaveComment})(CommentBox);
