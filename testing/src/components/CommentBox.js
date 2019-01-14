@@ -24,7 +24,7 @@ function CommentBox(props) {
         <button>Submit Comment</button>
       </div>
       </form>
-      <button onClick={()=>props.FetchComments()}>Fetch Comment</button>
+      <button className="fectComment" onClick={()=>props.FetchComments()}>Fetch Comment</button>
     </div>
     
   );
