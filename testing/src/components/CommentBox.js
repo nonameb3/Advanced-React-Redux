@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { SaveComment } from 'actions';
+import { SaveComment, FetchComments } from 'actions';
 
 function CommentBox(props) {
   const [comment, setComment] = useState('');
@@ -16,14 +16,18 @@ function CommentBox(props) {
   };
 
   return(
-    <form onSubmit={handleSubmit}>
+    <div>
+      <form onSubmit={handleSubmit}>
       <h4>Add comment</h4>
       <textarea onChange={handleChange} value={comment}/>
       <div>
         <button>Submit Comment</button>
       </div>
-    </form>
+      </form>
+      <button onClick={()=>props.FetchComments()}>Fetch Comment</button>
+    </div>
+    
   );
 };
 
-export default connect(null, {SaveComment})(CommentBox);
+export default connect(null, {SaveComment, FetchComments})(CommentBox);
