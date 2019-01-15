@@ -1,4 +1,4 @@
-import { SAVE_COMMENT, FETCH_COMMENTS } from 'actions/types';
+import { SAVE_COMMENT, FETCH_COMMENTS, AUTH_LOGIN } from 'actions/types';
 import axios from 'axios';
 
 export const SaveComment = comment => {
@@ -13,5 +13,12 @@ export const FetchComments = async () => {
   return{
     type: FETCH_COMMENTS,
     payload: response.data
+  };
+};
+
+export const AuthLogin = IsLogin => {
+  return {
+    type: AUTH_LOGIN,
+    payload: IsLogin
   };
 };
