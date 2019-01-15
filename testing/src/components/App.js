@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {AuthLogin} from 'actions';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
 
@@ -22,19 +23,12 @@ function App(props) {
   }
 
   function randerButton() {
-    if(props.auth){
-      return(
-        <button>
-          Log Out
-        </button>
-      );
-    } else{
-      return (
-        <button>
-          Login
-        </button>
-      );
-    }
+    const loginText = props.auth? 'Logout' : 'Login';
+    return (
+      <button onClick={()=>props.AuthLogin(!props.auth)}>
+        {loginText}
+      </button>
+    ); 
   }
 
   return (
@@ -50,4 +44,4 @@ function MapStateToProps(state){
   return{auth:state.auth};
 }
 
-export default connect(MapStateToProps)(App);
+export default connect(MapStateToProps,{AuthLogin})(App);

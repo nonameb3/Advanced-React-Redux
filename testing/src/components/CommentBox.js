@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import requireAuth from 'components/requireAuth';
 import { connect } from 'react-redux';
 import { SaveComment, FetchComments } from 'actions';
 
@@ -26,8 +27,7 @@ function CommentBox(props) {
       </form>
       <button className="fectComment" onClick={()=>props.FetchComments()}>Fetch Comment</button>
     </div>
-    
   );
 };
 
-export default connect(null, {SaveComment, FetchComments})(CommentBox);
+export default connect(null, {SaveComment, FetchComments})(requireAuth(CommentBox));
