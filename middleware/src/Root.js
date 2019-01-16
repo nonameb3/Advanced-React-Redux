@@ -3,14 +3,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Reducers from 'reducers';
-// import reduxPromise from 'redux-promise';
 import async from 'middleware/async';
+import stateValidater from 'middleware/stateValidator';
 
 function Root({children, initalState={}}){
-  //const store = createStore(Reducers, initalState, applyMiddleware(reduxPromise));
 
   const store = createStore(Reducers, initalState, composeWithDevTools(
-    applyMiddleware(async)
+    applyMiddleware(async, stateValidater)
   ));
 
   return (

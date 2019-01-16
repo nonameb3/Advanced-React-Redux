@@ -5,7 +5,7 @@ export default (state=[], {type, payload}) => {
     case SAVE_COMMENT:
       return [...state, payload];
     case FETCH_COMMENTS:
-      const namelists = payload.map(comment=>comment.name);
+      const namelists = payload.data.map(comment=>comment.name);
       return [...state, ...namelists];
     default:
       return state;
