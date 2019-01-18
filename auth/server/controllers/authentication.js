@@ -1,4 +1,5 @@
 const userModel = require('../models/user')
+const jwt = require('jwt-simple')
 
 let object = {}
 object.signup = function(req,res,next) {
@@ -22,11 +23,17 @@ object.signup = function(req,res,next) {
 
     user.save(err => {
       if(err) return next(err)
-
-      res.send(user)
+      res.send({token: tokenGenarater(user)})
     })
 
   })
+}
+
+// token gen
+function tokenGenarater(user){
+  const date = new Date().getTime()
+  const secretCode = process.env.SECRETCODE || 'sccode'
+  return jwt.encode({sub:user.id, lat:date}, secretCode)
 }
 
 module.exports = object
