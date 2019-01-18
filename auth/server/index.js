@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const http = require('http')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const router = require('./router')
