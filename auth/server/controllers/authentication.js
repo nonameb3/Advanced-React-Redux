@@ -2,7 +2,11 @@ const userModel = require('../models/user')
 const jwt = require('jwt-simple')
 
 let object = {}
-object.signup = function(req,res,next) {
+
+//===================
+// signUp controller
+//===================
+object.signup = function(req, res, next) {
   const email = req.body.email
   const password = req.body.password
 
@@ -29,7 +33,17 @@ object.signup = function(req,res,next) {
   })
 }
 
-// token gen
+//===================
+// signIn controller
+//===================
+object.signin = function(req, res, next){
+  console.log(req.user)
+  res.send({token: tokenGenarater(req.user)})
+}
+
+//===================
+// token gen method
+//===================
 function tokenGenarater(user){
   const date = new Date().getTime()
   const secretCode = process.env.SECRETCODE || 'sccode'

@@ -16,7 +16,7 @@ const userSchema = new Schema({
   }
 })
 
-// encrypt password before save a model
+// encrypt password before save a model (salt + has)
 userSchema.pre('save', function (next) {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err)
@@ -29,6 +29,15 @@ userSchema.pre('save', function (next) {
     })
   })
 })
+
+// encode password to has (compare)
+userSchema.methods.comparePassword = function(candidatePassword, callback){
+  bcrypt.compare(candidatePassword, this.password, (err, password)=>{
+    if(err) return callback(err)
+
+    callback(null, password)
+  })
+}
 
 // create new model
 const userModel = mongoose.model('user', userSchema)
