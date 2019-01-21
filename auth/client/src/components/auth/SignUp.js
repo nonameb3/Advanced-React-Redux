@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'redux';
@@ -6,8 +7,9 @@ import { SignUp as SignUpAction } from '../../actions'
 
 export class SignUp extends Component {
   onSubmit = (formPops) => {
-    console.log(formPops)
-    this.props.SignUpAction(formPops)
+    this.props.SignUpAction(formPops, ()=>{
+      this.props.history.push('/feature')
+    })
   }
 
   render() {
@@ -33,13 +35,22 @@ export class SignUp extends Component {
             autoComplete="none"
           />
         </fieldset>
+        <h3>
+          {this.props.errorMessage}
+        </h3>
         <button>Submit</button>
       </form>
     )
   }
 }
 
-export default compose(
-  connect(null, { SignUpAction }),
+function MapStateToProps(state){
+  return {errorMessage:state.auth.error}
+}
+
+const SignUpComponent = compose(
+  connect(MapStateToProps, { SignUpAction }),
   reduxForm({form:'signup'})
 )(SignUp)
+
+export default withRouter(SignUpComponent)
