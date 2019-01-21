@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
+import { compose } from 'redux';
+import { SignUp as SignUpAction } from '../../actions'
 
 export class SignUp extends Component {
   onSubmit = (formPops) => {
     console.log(formPops)
+    this.props.SignUpAction(formPops)
   }
 
   render() {
@@ -23,7 +27,7 @@ export class SignUp extends Component {
         <fieldset>
           <label>Password</label>
           <Field
-            name="passwprd"
+            name="password"
             type="password"
             component="input"
             autoComplete="none"
@@ -35,4 +39,7 @@ export class SignUp extends Component {
   }
 }
 
-export default reduxForm({form:'signup'})(SignUp)
+export default compose(
+  connect(null, { SignUpAction }),
+  reduxForm({form:'signup'})
+)(SignUp)

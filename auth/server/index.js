@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const router = require('./router')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 // database setup
 const mongodbURL = process.env.DATABASEURL
@@ -13,6 +14,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 // app setup
+app.use(cors()) // open this api access to any url
 app.use(morgan('combined'))
 app.use(bodyParser.json({type:'*/*'}))
 router(app)
