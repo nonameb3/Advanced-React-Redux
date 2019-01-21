@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'redux';
-import { SignUp as SignUpAction } from '../../actions'
+import { SignIn as SignInAction } from '../../actions'
 
-export class SignUp extends Component {
+export class SignIn extends Component {
   onSubmit = (formPops) => {
-    this.props.SignUpAction(formPops, ()=>{
+    this.props.SignInAction(formPops, ()=>{
       this.props.history.push('/feature')
     })
   }
@@ -38,7 +38,7 @@ export class SignUp extends Component {
         <h3>
           {this.props.errorMessage}
         </h3>
-        <button>SignUp</button>
+        <button>SignIn</button>
       </form>
     )
   }
@@ -48,9 +48,9 @@ function MapStateToProps(state){
   return {errorMessage:state.auth.error}
 }
 
-const SignUpComponent = compose(
-  connect(MapStateToProps, { SignUpAction }),
+const SignInComponent = compose(
+  connect(MapStateToProps, { SignInAction }),
   reduxForm({form:'signup'})
-)(SignUp)
+)(SignIn)
 
-export default withRouter(SignUpComponent)
+export default withRouter(SignInComponent)
